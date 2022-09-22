@@ -46,7 +46,7 @@ class PostsController extends Controller
         $categories = Category::all();
         $tags = Tag::all();
         // dd(compact("tags"));
-        return view("admin.create", compact("post"), compact("categories"), compact("tags"));
+        return view("admin.create", compact("post", "categories", "tags"));
     }
 
     /**
@@ -66,7 +66,10 @@ class PostsController extends Controller
         $post->post_image_url = $postData["post_image_url"];
         $post->date = date("Y/m/d H:i:s");
         $post->category_id = $postData["category"];
+        
         $post->save();
+
+        $post->tags()->sync($request->tags);
 
         return redirect()->route("admin.show", $post->id)->with("created", $post->id);
         
@@ -96,7 +99,7 @@ class PostsController extends Controller
         $post = Post::findOrFail($id);
         $categories = Category::all();
         $tags = Tag::all();
-        return view("admin.edit", compact("post"), compact("categories"), compact("tags"));
+        return view("admin.edit", compact("post", "categories", "tags"));
     }
 
     /**
@@ -118,6 +121,9 @@ class PostsController extends Controller
         $post->category_id = $postData["category"];
 
         $post->save();
+
+        $post->tags()->sync($request->tags);
+
 
         return redirect()->route("admin.show", $post->id)->with("updated", $post->id);
     }
