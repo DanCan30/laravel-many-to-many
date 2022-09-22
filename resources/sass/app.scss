@@ -1,0 +1,61 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// SHOW POST CARD
+.post-card {
+    border: 2px solid black;
+
+    h2 {
+        font-size: 4rem;
+    }
+
+    h5 {
+        font-size: 1rem;
+        color: grey;
+    }
+
+    img {
+        margin-block: 2rem;
+    }
+
+    p {
+        font-size: 2rem;
+    }
+}
+
+// INDEX VIEW
+
+div.warn {
+    text-align: center;
+    font-size: 1.8rem;
+    padding-block: 1rem;
+    text-transform: uppercase;
+    margin-block: .75rem;
+
+    &.delete-warn {
+        background-color: #f76060;
+    }
+
+    &.create-warn {
+        background-color: lightgreen;
+    }
+
+    &.update-warn {
+        background-color: rgb(102, 186, 243);
+    }
+}
+
+// VALIDATION ERROR
+
+.displayed-error {
+    font-style: italic;
+    color: red;
+    font-size: 1.25rem;
+    list-style: none;
+}
