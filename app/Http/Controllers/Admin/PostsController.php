@@ -45,7 +45,6 @@ class PostsController extends Controller
         $post = new Post();
         $categories = Category::all();
         $tags = Tag::all();
-        // dd(compact("tags"));
         return view("admin.create", compact("post", "categories", "tags"));
     }
 
