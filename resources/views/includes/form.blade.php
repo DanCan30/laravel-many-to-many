@@ -22,6 +22,14 @@
         @endforeach
     </select>
 
+    @forelse ($tags as $tag)
+        <input type="checkbox" name="tags[]" id="tag-input" value="{{ $tag->id }}">
+        <label for="tag-input">{{ $tag->name }}</label>
+
+    @empty
+        no tags
+    @endforelse
+
     <button type="submit" class="w-25 align-self-center btn btn-primary">{{ $submitMessage }}</button>
 
 </form>

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Category;
 use App\Models\Admin\Post;
-use DateTime;
+use App\Models\Admin\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -44,7 +44,9 @@ class PostsController extends Controller
     {
         $post = new Post();
         $categories = Category::all();
-        return view("admin.create", compact("post"), compact("categories"));
+        $tags = Tag::all();
+        // dd(compact("tags"));
+        return view("admin.create", compact("post"), compact("categories"), compact("tags"));
     }
 
     /**
@@ -79,6 +81,7 @@ class PostsController extends Controller
     public function show($id)
     {
         $post = Post::findOrFail($id);
+
         return view("admin.show", compact("post"));
     }
 
@@ -92,7 +95,8 @@ class PostsController extends Controller
     {
         $post = Post::findOrFail($id);
         $categories = Category::all();
-        return view("admin.edit", compact("post"), compact("categories"));
+        $tags = Tag::all();
+        return view("admin.edit", compact("post"), compact("categories"), compact("tags"));
     }
 
     /**

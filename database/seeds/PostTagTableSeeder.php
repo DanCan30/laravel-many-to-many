@@ -20,7 +20,7 @@ class PostTagTableSeeder extends Seeder
             $randomTags = Tag::inRandomOrder()->limit(2)->get();
 
             foreach($randomTags as $tag) {
-                $post->tags()->attach($tag);
+                $post->tags()->attach($tag->id);
             }
         }
     }
