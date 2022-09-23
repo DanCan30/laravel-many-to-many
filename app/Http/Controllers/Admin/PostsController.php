@@ -16,7 +16,8 @@ class PostsController extends Controller
         "title" => "required|min:3|max:150",
         "content" => "required|min:5",
         "post_image_url" => "active_url",
-        "category" => "required|exists:categories,id"
+        "category" => "required|exists:categories,id",
+        "tags" => "exists:tags,id",
     ];
 
     public function __construct()
