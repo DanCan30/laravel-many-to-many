@@ -17,7 +17,7 @@
                 <h5>{{ $post->user->name }}, in {{ $post->date }}</h5> 
                 <span>{{ $post->category->name }} - 
                     @foreach ($post->tags as $tag) 
-                        #{{ $tag->name }}
+                       <span class="text-primary"> #{{ $tag->name }} </span>
                     @endforeach
                 </span>
                 <img src="{{ $post->post_image_url }}" class="w-75 align-self-center" alt="Post Image">

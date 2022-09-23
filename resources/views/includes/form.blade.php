@@ -3,10 +3,10 @@
     @method($method)
 
     <label class="h2 mt-5" for="title-input">Post title</label>
-    <input type="text" name="title" id="title-input" value="{{ old("title", $post->title) }}" class="h3 p-1 mt-3">
+    <input required type="text" name="title" id="title-input" value="{{ old("title", $post->title) }}" class="h3 p-1 mt-3">
     @include("includes.error", [$inputName = "title"])
 
-    <label class="h2" for="content-input">Post content</label>
+    <label required class="h2" for="content-input">Post content</label>
     <textarea name="content" id="content-input"cols="30" rows="10" class="h4 mt-3">
         {{ old("content", $post->content) }}
     </textarea>
@@ -17,25 +17,32 @@
     @include("includes.error", [$inputName = "post_image_url"])
     
     <h4>Category</h4>
-    <select name="category" id="category-input" class="mb-5">
+    <select required name="category" id="category-input" class="mb-5">
         @foreach ($categories as $category)
             <option 
-            {{ $category->id == $post->category->id ? "selected" : "" }}
+            {{ isset($post->category->id) && $category->id == $post->category->id ? "selected" : "" }}
             value="{{ $category->id }}">{{ $category->name }}</option>
         @endforeach
     </select>
     @include("includes.error", [$inputName = "category"])
 
     <h4>Tags</h4>
-    @forelse ($tags as $tag)
-    <div class="form-check form-check-inline">
-        <input class="form-check-input"type="checkbox" name="tags[]" id="tag-input" value="{{ $tag->id }}">
-        <label class="form-check-label" for="tag-input">{{ $tag->name }}</label>
-    </div>
+    <div class="form-check form-check-inline d-flex justify-content-around">
 
-    @empty
-        <p>No tags available.</p>
-    @endforelse
+            
+            @forelse ($tags as $tag)
+            
+                @if ($errors->any())
+                    <input {{ in_array($tag->id, old("tags", [])) ? "checked" : "" }} class="form-check-input"type="checkbox" name="tags[]" id="tag-input" value="{{ $tag->id }}">
+                @else   
+                    <input {{ $post->tags->contains($tag) ? "checked" : "" }} class="form-check-input"type="checkbox" name="tags[]" id="tag-input" value="{{ $tag->id }}">
+                @endif
+                <label class="form-check-label" for="tag-input">{{ $tag->name }}</label>
+            @empty
+                <p>No tags available.</p>
+            @endforelse
+
+    </div>
 
     <button type="submit" class="w-25 align-self-center mt-5 btn btn-primary">{{ $submitMessage }}</button>
 
