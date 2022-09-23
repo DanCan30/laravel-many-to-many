@@ -1,7 +1,4 @@
-@extends("layouts.app")
-
-@section("content")
-    @if ( session("created") )
+@if ( session("created") )
         <div class="warn create-warn container">
             Post n°{{ session("created") }} created.
         </div>
@@ -33,4 +30,3 @@
             </div>
         </div>
     </div>
-@endsection

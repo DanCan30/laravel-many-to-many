@@ -33,7 +33,7 @@ class PostsController extends Controller
     {
         // $posts = Post::where("user_id", Auth::user()->id)->get();
         $posts = Post::all();
-        return view("admin.index", compact("posts"));
+        return view("admin.posts.index", compact("posts"));
     }
 
     /**
@@ -46,7 +46,7 @@ class PostsController extends Controller
         $post = new Post();
         $categories = Category::all();
         $tags = Tag::all();
-        return view("admin.create", compact("post", "categories", "tags"));
+        return view("admin.posts.create", compact("post", "categories", "tags"));
     }
 
     /**
@@ -85,7 +85,7 @@ class PostsController extends Controller
     {
         $post = Post::findOrFail($id);
 
-        return view("admin.show", compact("post"));
+        return view("admin.posts.show", compact("post"));
     }
 
     /**
@@ -99,7 +99,7 @@ class PostsController extends Controller
         $post = Post::findOrFail($id);
         $categories = Category::all();
         $tags = Tag::all();
-        return view("admin.edit", compact("post", "categories", "tags"));
+        return view("admin.posts.edit", compact("post", "categories", "tags"));
     }
 
     /**
