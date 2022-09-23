@@ -9,6 +9,6 @@ class Category extends Model
     public $timestamps = false;
 
     public function posts() {
-        return $this->hasMany("App\Model\Admin\Post");
+        return $this->hasMany("App\Models\Admin\Post");
     }
 }

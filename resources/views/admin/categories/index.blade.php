@@ -13,6 +13,7 @@
                     <thead>
                         <td>ID</td>
                         <td>Name</td>
+                        <td><a href="{{ route("categories.create") }}" class="btn btn-sm btn-primary">Add</a></td>
                     </thead>
                     <tbody>
                         @forelse ($categories as $category)

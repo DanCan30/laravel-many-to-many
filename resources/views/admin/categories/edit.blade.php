@@ -1,5 +1,5 @@
 @extends("layouts.app")
 
 @section("content")
-    @include("admin.posts.includes.form", [$actionRoute = route("admin.update", $post->id), $method = "PUT", $submitMessage = "Update Post"])
+    @include("admin.categories.includes.form", [$actionRoute = route("categories.update", $category->id), $method = "PUT", $submitMessage = "Update Category"])
 @endsection
