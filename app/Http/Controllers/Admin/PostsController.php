@@ -68,8 +68,9 @@ class PostsController extends Controller
         $post->category_id = $postData["category"];
         
         $post->save();
-
-        $post->tags()->sync($request->tags);
+        if($request->tags) {
+            $post->tags()->sync($request->tags);
+        }
 
         return redirect()->route("admin.show", $post->id)->with("created", $post->id);
         
@@ -122,7 +123,11 @@ class PostsController extends Controller
 
         $post->save();
 
-        $post->tags()->sync($request->tags);
+        if($request->tags) {
+            $post->tags()->sync($request->tags);
+        } else {
+            $post->tags()->detach();
+        }
 
 
         return redirect()->route("admin.show", $post->id)->with("updated", $post->id);
