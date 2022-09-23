@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\Admin\Category;
+use Illuminate\Support\Str;
 
 class CategoriesTableSeeder extends Seeder
 {
@@ -26,7 +27,7 @@ class CategoriesTableSeeder extends Seeder
         foreach($categories as $category) {
             $newCategory = new Category();
             $newCategory->name = $category;
-            $newCategory->slug = $newCategory->name;
+            $newCategory->slug = Str::slug($newCategory->name) ;
             $newCategory->save();
 
         }

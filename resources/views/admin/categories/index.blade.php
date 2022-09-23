@@ -12,23 +12,16 @@
                 <table class="table table-dark table-striped">
                     <thead>
                         <td>ID</td>
-                        <td>Title</td>
-                        <td>Username</td>
-                        <td>Date</td>
-                        <td>Category</td>
-                        <td></td>
+                        <td>Name</td>
                     </thead>
                     <tbody>
-                        @forelse ($posts as $post)
+                        @forelse ($categories as $category)
                             <tr>
-                                <td>{{ $post->id }}</td>
-                                <td><a href="{{ route("admin.show", $post->id) }}">{{ $post->title }}</a></td>
-                                <td>{{ $post->user->name }}</td>
-                                <td>{{ $post->date }}</td>
-                                <td>{{ $post->category->name }}</td>
+                                <td>{{ $category->id }}</td>
+                                <td><a href="{{ route("categories.show", $category->id) }}">{{ $category->name }}</a></td>
                                 <td class="d-flex">
-                                    <a href="{{ route("admin.edit", $post->id) }}" class="btn btn-sm btn-success">Edit</a>
-                                    <form action="{{ route("admin.destroy", $post->id) }}" method="POST" class="delete-element-button">
+                                    <a href="{{ route("categories.edit", $category->id) }}" class="btn btn-sm btn-success">Edit</a>
+                                    <form action="{{ route("categories.destroy", $category->id) }}" method="POST" class="delete-element-button">
                                         @csrf
                                         @method("DELETE")
                                         <button type="submit" class="btn btn-sm text-danger">Delete</button>
@@ -36,7 +29,7 @@
                                 </td>
                             </tr>
                         @empty
-                            <h2>There are no posts.</h2>
+                            <h2>There are no categories.</h2>
                         @endforelse
                     </tbody>
                 </table>
