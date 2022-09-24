@@ -1,10 +1,10 @@
 @if ( session("created") )
         <div class="warn create-warn container">
-            Post n°{{ session("created") }} created.
+            Category n°{{ session("created") }} created.
         </div>
     @elseif ( session("updated") )   
         <div class="warn update-warn container">
-            Post n°{{ session("updated") }} updated.
+            Category n°{{ session("updated") }} updated.
         </div>
     @endif
     <div class="container">

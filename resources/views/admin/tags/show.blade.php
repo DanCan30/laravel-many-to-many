@@ -2,12 +2,12 @@
 
 @section("content")
         <h2 class="text-center h1">
-            {{ $category->name }}
+            {{ $selectedTag->name }}
         </h2>
     <h4 class="text-center my-5">
-        Posts for that category
+        Posts for that tag
     </h4>
-    @foreach ($category->posts as $post)
-        @include("admin.categories.includes.post", $post)
+    @foreach ($selectedTag->posts as $post)
+        @include("admin.tags.includes.post", $post)
     @endforeach
 @endsection

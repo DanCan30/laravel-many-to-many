@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Tag;
 use Illuminate\Http\Request;
 
 class TagsController extends Controller
@@ -14,7 +15,9 @@ class TagsController extends Controller
      */
     public function index()
     {
-        //
+        $tags = Tag::all();
+
+        return view("admin.tags.index", compact("tags"));
     }
 
     /**
@@ -24,7 +27,8 @@ class TagsController extends Controller
      */
     public function create()
     {
-        //
+        $tag = new Tag();
+        return view("admin.tags.create", compact("tag"));
     }
 
     /**
@@ -35,7 +39,12 @@ class TagsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $newTag = new Tag();
+        $newTag->name = $data["name"];
+        $newTag->save();
+
+        return redirect()->route("tags.index")->with("created", $newTag->name);
     }
 
     /**
@@ -46,7 +55,9 @@ class TagsController extends Controller
      */
     public function show($id)
     {
-        //
+        $selectedTag = Tag::findOrFail($id);
+
+        return view("admin.tags.show", compact("selectedTag"));
     }
 
     /**
@@ -57,7 +68,9 @@ class TagsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $selectedTag = Tag::findOrFail($id);
+
+        return view("admin.tags.edit", compact("selectedTag"));
     }
 
     /**
@@ -69,7 +82,12 @@ class TagsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $selectedTag = Tag::findOrFail($id);
+        $selectedTag->name = $data["name"];
+        $selectedTag->save();
+
+        return redirect()->route("tags.index", compact("selectedTag"))->with("updated", $selectedTag->name);
     }
 
     /**
@@ -80,6 +98,10 @@ class TagsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $selectedTag = Tag::findOrFail($id);
+
+        $selectedTag->delete();
+
+        return redirect()->route("tags.index")->with("deleted", $selectedTag->name);
     }
 }

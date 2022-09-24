@@ -4,7 +4,7 @@
     <div class="container">
         @if (session("deleted"))
             <div class="warn delete-warn">
-                Post n°{{ session("deleted") }} deleted.
+                Tag {{ session("deleted") }} deleted.
             </div>
         @endif
         <div class="row">
@@ -13,16 +13,16 @@
                     <thead>
                         <td>ID</td>
                         <td>Name</td>
-                        <td><a href="{{ route("categories.create") }}" class="btn btn-sm btn-primary">Add</a></td>
+                        <td><a href="{{ route("tags.create") }}" class="btn btn-sm btn-primary">Add</a></td>
                     </thead>
                     <tbody>
-                        @forelse ($categories as $category)
+                        @forelse ($tags as $tag)
                             <tr>
-                                <td>{{ $category->id }}</td>
-                                <td><a href="{{ route("categories.show", $category->id) }}">{{ $category->name }}</a></td>
+                                <td>{{ $tag->id }}</td>
+                                <td><a href="{{ route("tags.show", $tag->id) }}">{{ $tag->name }}</a></td>
                                 <td class="d-flex">
-                                    <a href="{{ route("categories.edit", $category->id) }}" class="btn btn-sm btn-success">Edit</a>
-                                    <form action="{{ route("categories.destroy", $category->id) }}" method="POST" class="delete-element-button">
+                                    <a href="{{ route("tags.edit", $tag->id) }}" class="btn btn-sm btn-success">Edit</a>
+                                    <form action="{{ route("tags.destroy", $tag->id) }}" method="POST" class="delete-element-button">
                                         @csrf
                                         @method("DELETE")
                                         <button type="submit" class="btn btn-sm text-danger">Delete</button>
@@ -30,7 +30,7 @@
                                 </td>
                             </tr>
                         @empty
-                            <h2>There are no categories.</h2>
+                            <h2>There are no tags.</h2>
                         @endforelse
                     </tbody>
                 </table>
