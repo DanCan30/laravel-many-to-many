@@ -3,21 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
-class CategoriesController extends Controller
+class TagsController extends Controller
 {
-
-    protected $validationRules = [
-        "name" => "min:2",
-    ];
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -25,8 +14,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return view("admin.categories.index", compact("categories"));
+        //
     }
 
     /**
@@ -36,9 +24,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        $category = new Category();
-
-        return view("admin.categories.create", compact("category"));
+        //
     }
 
     /**
@@ -49,13 +35,7 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate($this->validationRules);
-        $newCategory = new Category();
-        $newCategory->name = $data["name"];
-        $newCategory->slug = Str::slug($data["name"]);
-        $newCategory->save();
-
-        return redirect()->route("categories.index");
+        //
     }
 
     /**
@@ -66,8 +46,7 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
-        $category = Category::findOrFail($id);
-        return view("admin.categories.show", compact("category"));
+        //
     }
 
     /**
@@ -78,8 +57,7 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::findOrFail($id);
-        return view("admin.categories.edit", compact("category"));
+        //
     }
 
     /**
@@ -91,14 +69,7 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->all();
-
-        $updatedCategory = Category::findOrFail($id);
-        $updatedCategory->name = $data["name"];
-        $updatedCategory->slug = Str::slug($data["name"]);
-        $updatedCategory->save();
-
-        return redirect()->route("categories.index", $updatedCategory->id);
+        //
     }
 
     /**
@@ -109,9 +80,6 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::findOrFail($id);
-        $category->delete();
-
-        return redirect()->route("categories.index");
+        //
     }
 }

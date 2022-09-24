@@ -4,7 +4,6 @@
 
     <label for="name-input">Category name</label>
     <input type="text" class="w-50" name="name" id="name-input">
-    @include("admin.categories.includes.error", [$inputName = "name"])
 
     <button type="submit" class="w-25 align-self-center mt-5 btn btn-primary">{{ $submitMessage }}</button>
 
