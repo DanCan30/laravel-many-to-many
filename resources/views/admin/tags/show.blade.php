@@ -8,6 +8,15 @@
         Posts for that tag
     </h4>
     @foreach ($selectedTag->posts as $post)
-        @include("admin.tags.includes.post", $post)
+        @include("post", $post)
+
+        <div class="d-flex container justify-content-center w-100 post-footer">
+            <a href="{{ route("admin.edit", $post->id) }}" class="btn btn-lg btn-primary m-3">Details</a>
+            <form action="{{ route("admin.clear", $post->id) }}" class="m-3" method="post">
+                @csrf
+                @method("PATCH")
+                <button type="submit" class="btn btn-lg btn-warning">Remove post from tags</button>
+            </form>
+        </div>
     @endforeach
 @endsection

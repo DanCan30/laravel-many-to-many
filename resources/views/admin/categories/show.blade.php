@@ -8,6 +8,14 @@
         Posts for that category
     </h4>
     @foreach ($category->posts as $post)
-        @include("admin.categories.includes.post", $post)
+        @include("post", $post)
+        <div class="d-flex container justify-content-center w-100 post-footer">
+            <a href="{{ route("admin.show", $post->id) }}" class="btn btn-lg btn-primary m-3">Details</a>
+            <form action="{{ route("admin.clear", $post->id) }}" class="m-3" method="post">
+                @csrf
+                @method("PATCH")
+                <button type="submit" class="btn btn-lg btn-warning">Remove post from category</button>
+            </form>
+        </div>
     @endforeach
 @endsection

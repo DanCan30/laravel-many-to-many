@@ -147,4 +147,8 @@ class PostsController extends Controller
 
         return redirect()->route("admin.index")->with("deleted", $post->id);
     }
+
+    // public function removeFromCategory($id) 
+    // {
+    // }
 }

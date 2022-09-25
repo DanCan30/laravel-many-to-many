@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Category;
+use App\Models\Admin\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -114,4 +115,5 @@ class CategoriesController extends Controller
 
         return redirect()->route("categories.index");
     }
+
 }
