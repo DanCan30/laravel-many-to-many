@@ -12,7 +12,7 @@
         <div class="col-12 post-card d-flex flex-column p-2">
             <h2>{{ $post->title }}</h2>
             <h5>{{ $post->user->name }}, in {{ $post->date }}</h5> 
-            <span>{{ $post->category->name }} - 
+            <span>{{ isset($post->category->name) ? $post->category->name : "No category" }} - 
                 @foreach ($post->tags as $tag) 
                     <span class="text-primary"> #{{ $tag->name }} </span>
                 @endforeach

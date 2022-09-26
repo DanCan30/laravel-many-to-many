@@ -33,7 +33,7 @@ class PostsController extends Controller
     public function index()
     {
         // $posts = Post::where("user_id", Auth::user()->id)->get();
-        $posts = Post::all();
+        $posts = Post::paginate(20);
         return view("admin.posts.index", compact("posts"));
     }
 
@@ -149,7 +149,13 @@ class PostsController extends Controller
         return redirect()->route("admin.index")->with("deleted", "The post n°" . $post->id . " has been deleted.");
     }
 
-    // public function removeFromCategory($id) 
-    // {
-    // }
+    public function removeFromCategory($postId) 
+    {
+        $post = Post::findOrFail($postId);
+        $category = $post->category;
+        $post->category_id = null;
+        $post->save();
+
+        return view("admin.categories.show", compact("category"));
+    }
 }

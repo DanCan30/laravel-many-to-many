@@ -5,9 +5,9 @@
             {{ $category->name }}
         </h2>
     <h4 class="text-center my-5">
-        Posts for that category
+        Posts for that category:
     </h4>
-    @foreach ($category->posts as $post)
+    @forelse ($category->posts as $post)
         @include("post", $post)
         <div class="d-flex container justify-content-center w-100 post-footer">
             <a href="{{ route("admin.show", $post->id) }}" class="btn btn-lg btn-primary m-3">Details</a>
@@ -17,5 +17,7 @@
                 <button type="submit" class="btn btn-lg btn-warning">Remove post from category</button>
             </form>
         </div>
-    @endforeach
+    @empty
+    <h4 class="text-center">No posts for that category.</h4>
+    @endforelse
 @endsection
