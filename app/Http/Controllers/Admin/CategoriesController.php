@@ -56,9 +56,9 @@ class CategoriesController extends Controller
         $newCategory->slug = Str::slug($data["name"]);
         $newCategory->save();
 
-        return redirect()->route("categories.index");
+        return redirect()->route("categories.index")->with("created", "The category " . $newCategory->name . " has been created.");
     }
-
+    
     /**
      * Display the specified resource.
      *
@@ -99,7 +99,7 @@ class CategoriesController extends Controller
         $updatedCategory->slug = Str::slug($data["name"]);
         $updatedCategory->save();
 
-        return redirect()->route("categories.index", $updatedCategory->id);
+        return redirect()->route("categories.index", $updatedCategory->id)->with("updated", "The category " . $updatedCategory->name . " has been updated.");
     }
 
     /**
@@ -113,7 +113,7 @@ class CategoriesController extends Controller
         $category = Category::findOrFail($id);
         $category->delete();
 
-        return redirect()->route("categories.index");
+        return redirect()->route("categories.index")->with("deleted", "The category " . $category->name . " has been deleted.");
     }
 
 }

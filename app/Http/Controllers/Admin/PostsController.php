@@ -73,7 +73,7 @@ class PostsController extends Controller
             $post->tags()->sync($request->tags);
         }
 
-        return redirect()->route("admin.show", $post->id)->with("created", $post->id);
+        return redirect()->route("admin.show", $post->id)->with("created", "The post n°" . $post->id . " has been created.");
         
     }
 
@@ -131,7 +131,7 @@ class PostsController extends Controller
         }
 
 
-        return redirect()->route("admin.show", $post->id)->with("updated", $post->id);
+        return redirect()->route("admin.show", $post->id)->with("updated", "The post n°" . $post->id . " has been updated.");
     }
 
     /**
@@ -146,7 +146,7 @@ class PostsController extends Controller
 
         $post->delete();
 
-        return redirect()->route("admin.index")->with("deleted", $post->id);
+        return redirect()->route("admin.index")->with("deleted", "The post n°" . $post->id . " has been deleted.");
     }
 
     // public function removeFromCategory($id) 

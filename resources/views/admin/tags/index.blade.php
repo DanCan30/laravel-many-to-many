@@ -4,7 +4,15 @@
     <div class="container">
         @if (session("deleted"))
             <div class="warn delete-warn">
-                Tag {{ session("deleted") }} deleted.
+                {{ session("deleted") }}
+            </div>
+        @elseif (session("created"))
+        <div class="warn create-warn">
+            {{ session("created") }}
+        </div>
+        @elseif (session("updated"))
+            <div class="warn update-warn">
+                {{ session("updated") }}
             </div>
         @endif
         <div class="row">

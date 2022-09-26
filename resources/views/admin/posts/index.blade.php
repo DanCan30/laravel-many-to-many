@@ -4,7 +4,7 @@
     <div class="container">
         @if (session("deleted"))
             <div class="warn delete-warn">
-                Post n°{{ session("deleted") }} deleted.
+                {{ session("deleted") }}
             </div>
         @endif
         <div class="row">

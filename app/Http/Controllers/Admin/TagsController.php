@@ -44,7 +44,7 @@ class TagsController extends Controller
         $newTag->name = $data["name"];
         $newTag->save();
 
-        return redirect()->route("tags.index")->with("created", $newTag->name);
+        return redirect()->route("tags.index")->with("created", "The tag " . $newTag->name . " has been created.");
     }
 
     /**
@@ -55,9 +55,9 @@ class TagsController extends Controller
      */
     public function show($id)
     {
-        $selectedTag = Tag::findOrFail($id);
+        $tag = Tag::findOrFail($id);
 
-        return view("admin.tags.show", compact("selectedTag"));
+        return view("admin.tags.show", compact("tag"));
     }
 
     /**
@@ -68,9 +68,9 @@ class TagsController extends Controller
      */
     public function edit($id)
     {
-        $selectedTag = Tag::findOrFail($id);
+        $tag = Tag::findOrFail($id);
 
-        return view("admin.tags.edit", compact("selectedTag"));
+        return view("admin.tags.edit", compact("tag"));
     }
 
     /**
@@ -83,11 +83,11 @@ class TagsController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $selectedTag = Tag::findOrFail($id);
-        $selectedTag->name = $data["name"];
-        $selectedTag->save();
+        $tag = Tag::findOrFail($id);
+        $tag->name = $data["name"];
+        $tag->save();
 
-        return redirect()->route("tags.index", compact("selectedTag"))->with("updated", $selectedTag->name);
+        return redirect()->route("tags.index", compact("tag"))->with("updated", "The tag " . $tag->name . " has been updated." );
     }
 
     /**
@@ -98,10 +98,10 @@ class TagsController extends Controller
      */
     public function destroy($id)
     {
-        $selectedTag = Tag::findOrFail($id);
+        $tag = Tag::findOrFail($id);
 
-        $selectedTag->delete();
+        $tag->delete();
 
-        return redirect()->route("tags.index")->with("deleted", $selectedTag->name);
+        return redirect()->route("tags.index")->with("deleted", "the tag " . $tag->name . " has been deleted.");
     }
 }
