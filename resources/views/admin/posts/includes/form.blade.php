@@ -1,4 +1,4 @@
-<form action="{{ $actionRoute }}" method="POST" class="container d-flex flex-column">
+<form action="{{ $actionRoute }}" method="POST" enctype="multipart/form-data" class="container d-flex flex-column">
     @csrf
     @method($method)
 
@@ -12,9 +12,13 @@
     </textarea>
     @include("admin.posts.includes.error", [$inputName = "content"])
 
-    <label class="h2" for="post_image_url-input">Post image</label>
+    {{-- <label class="h2" for="post_image_url-input">Post image</label>
     <input type="text" name="post_image_url" id="post_image_url-input" value="{{ old("post_image_url", $post->post_image_url) }}" class="mb-5 mt-3 h3">
-    @include("admin.posts.includes.error", [$inputName = "post_image_url"])
+    @include("admin.posts.includes.error", [$inputName = "post_image_url"]) --}}
+
+    <label class="h2" for="post_image-input">Post image</label>
+    <input type="file" name="post_image" id="post_image-input" value="{{ old("post_image", $post->post_image) }}" class="mb-5 mt-3 h3">
+    @include("admin.posts.includes.error", [$inputName = "post_image"])
     
     <h4>Category</h4>
     <select required name="category" id="category-input" class="mb-5">

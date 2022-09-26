@@ -8,6 +8,7 @@ use App\Models\Admin\Post;
 use App\Models\Admin\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostsController extends Controller
 {
@@ -15,7 +16,7 @@ class PostsController extends Controller
     private $validationRules = [
         "title" => "required|min:3|max:150",
         "content" => "required|min:5",
-        "post_image_url" => "active_url",
+        "post_image" => "image|max:2048",
         "category" => "required|exists:categories,id",
         "tags" => "exists:tags,id",
     ];
@@ -63,7 +64,7 @@ class PostsController extends Controller
         $post->title = $postData["title"];
         $post->user_id = Auth::user()->id;
         $post->content = $postData["content"];
-        $post->post_image_url = $postData["post_image_url"];
+        $post->post_image = Storage::put("uploads/" . Auth::user()->name . "/posts", $request->post_image);
         $post->date = date("Y/m/d H:i:s");
         $post->category_id = $postData["category"];
         
@@ -118,7 +119,7 @@ class PostsController extends Controller
         $post = Post::findOrFail($id);
         $post->title = $postData["title"];
         $post->content = $postData["content"];
-        $post->post_image_url = $postData["post_image_url"];
+        $post->post_image = Storage::put("uploads/" . $post->user->name . "/posts", $request->post_image);
         $post->category_id = $postData["category"];
 
         $post->save();
